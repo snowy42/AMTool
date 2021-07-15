@@ -22,7 +22,41 @@ plsWait:=false																				; ==== ensures plsWait is initialised as false
 SetTimer, RemoveRequestBulk, 100
 SetTimer, ExitScript, 100
 Hotkey, !s, SearchTool
+Hotkey, #F12, AssignAssets
 return
+
+AssignAssets::						;== Auto Assign all tasks
+	SetTitleMatchMode, 2
+	if WinActive("- [Work Order]")
+	{
+		Click 287, 168
+		Click 249, 275
+		Sendinput {tab 13}{enter}
+		Loop 5
+		{
+			WinWait, Assign Assets To Task
+			WinActivate, Assign Assets To Task
+			Click 50, 141
+			Sendinput !{down 100}
+			Click 576, 247
+			Sendinput {tab 16}{enter}
+			WinWaitClose, Assign Assets To Task
+			WinWaitActive, - [Work Order]
+			if (A_Index < 5)
+				Sendinput {tab 17}{enter}
+		}
+		click 247, 167
+		mousemove 312, 87
+	}
+	SetTitleMatchMode, 1
+return
+
+
+
+
+
+
+
 
 ExitScript:
 	if !WinExist("ahk_pid " . AMPID)
@@ -76,7 +110,7 @@ if !plsWait																					; ==== makes sure subroutine isn't already runni
 		ControlGetText, dt, WindowsForms10.EDIT.app.0.1175939_r7_ad11, New Work Order		; ==== Gets the text from the data template field
 		WinWaitClose, New Work Order														; ==== Waits until the New Work Order window is closed
 	}
-	Gui, 2:Hide																				; ==== Hides the GUI (incase the user closes the new work order screen before selecting a data template
+	Gui, 2:Hide 																			; ==== Hides the GUI (incase the user closes the new work order screen before selecting a data template
 	plsWait:=false																			; ==== notifies the script that subroutine is no longer running
 }
 return

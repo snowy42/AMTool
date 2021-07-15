@@ -25,7 +25,7 @@ Hotkey, !s, SearchTool
 Hotkey, #F12, AssignAssets
 return
 
-AssignAssets::						;== Auto Assign all tasks
+AssignAssets:						;== Auto Assign all tasks
 	SetTitleMatchMode, 2
 	if WinActive("- [Work Order]")
 	{

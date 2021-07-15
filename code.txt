@@ -85,9 +85,10 @@ return
 
 
 RemoveRequestBulk:
-	SetTitleMatchMode, 3
+	SetTitleMatchMode, 2
 	if WinActive("AssetMaster 6.0.17.0 - [Request]")
 		rem()
+	SetTitleMatchMode, 3
 return
 
 rem() {

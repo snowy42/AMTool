@@ -85,30 +85,28 @@ return
 
 
 RemoveRequestBulk:
-	SetTitleMatchMode, 2
-	rem()
 	SetTitleMatchMode, 3
+	if WinActive("AssetMaster 6.0.17.0 - [Request]")
+		rem()
 return
 
 rem() {
-	if WinActive("AssetMaster 6.0.17.0 - [Request]") {
-		Loop, 150
-		{
-			i := A_Index
-			Loop % vars.length() {
-				ControlGetText, prob, WindowsForms10.EDIT.app.0.1175939_r7_ad%i%, % "- [Request]"
-				if (A_Index = 4) {
-					if (InStr(prob, vars[A_Index]))
-						ControlSetText, WindowsForms10.EDIT.app.0.1175939_r7_ad%i%, % StrReplace(prob, vars[A_Index], " - "), % "- [Request]"
-				}
-				else {
-					if (InStr(prob, vars[A_Index]))
-						ControlSetText, WindowsForms10.EDIT.app.0.1175939_r7_ad%i%, % StrReplace(prob, vars[A_Index], ""), % "- [Request]"
-				}
-				sleep 2
+	Loop, 150
+	{
+		i := A_Index
+		Loop % vars.length() {
+			ControlGetText, prob, WindowsForms10.EDIT.app.0.1175939_r7_ad%i%, % "- [Request]"
+			if (A_Index = 4) {
+				if (InStr(prob, vars[A_Index]))
+					ControlSetText, WindowsForms10.EDIT.app.0.1175939_r7_ad%i%, % StrReplace(prob, vars[A_Index], " - "), % "- [Request]"
 			}
-		}	
-	}
+			else {
+				if (InStr(prob, vars[A_Index]))
+					ControlSetText, WindowsForms10.EDIT.app.0.1175939_r7_ad%i%, % StrReplace(prob, vars[A_Index], ""), % "- [Request]"
+			}
+			sleep 2
+		}
+	}	
 }
 
 
